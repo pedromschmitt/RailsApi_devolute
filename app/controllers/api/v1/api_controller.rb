@@ -1,7 +1,7 @@
 module Api
   module V1
     class ApiController < AplicationController
-      # Global methods here
+      include Knock::Authenticable
     end
   end
 end
