@@ -38,6 +38,9 @@ group :test do
   gem "ffaker"
   # Generate record based in a model
   gem 'factory_bot_rails'
+  # provides RSpec one-liners to test common Rails functionality
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
