@@ -1,5 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'support/request_spec_helper'
+require 'support/shared_example_specs'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -43,6 +45,12 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  # Custom json helpers
+  config.include Requests::JsonHelpers, type: :request
+  # Custom Header helpers
+  config.include Requests::HeaderHelpers, type: :request
+  # Custom Serializer helpers
+  config.include Requests::SerializerHelpers, type: :request
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
