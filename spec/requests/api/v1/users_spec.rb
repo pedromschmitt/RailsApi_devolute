@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rspec/json_expectations'
 
 RSpec.describe "Api::V1::Users", type: :request do
   describe "GET /api/v1/users/:id" do
@@ -45,4 +46,35 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
 
   end
+
+  describe 'POST  /api/v1/users' do
+    context 'Valid params' do
+      let(:user_params) { attributes_for(:user) }
+
+      it 'return created' do
+        post '/api/v1/users/', params: { user: user_params }
+        except(response).to have_http_status(:created)
+      end
+
+      it 'returns right user in json' do
+        post '/api/v1/users/', params: { user: user_params }
+        except(json).to include_json(user_params.except(:password))
+      end
+
+      it 'create user' do
+        expect do
+          post '/api/v1/users/', params: { user: user_params }
+        end.to change { User.count }.by(1)
+      end
+    end
+
+    context 'Invalid params' do
+      let(:user_params) { {foo: :bar} }
+
+      before { post '/api/v1/users/', params: { user: user_params } }
+
+      it { except(response).to have_http_status(:unprocessable_entity) }
+    end
+  end
+  
 end
