@@ -1,16 +1,33 @@
-class Api::V1::UsersController < ApplicationController
-  def create
-  end
+module Api
+  module V1
+    class UsersController < Api::V1::ApiController
 
-  def destroy
-  end
+      def create
+        user = User.new(user_params)
+        if user.save
+          render json: user, status: :created
+        else
+          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
 
-  def update
-  end
+      def destroy
+      end
 
-  def current
-  end
+      def update
+      end
 
-  def show
+      def current
+      end
+
+      def show
+      end
+
+      private 
+
+      def user_params
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      end
+    end
   end
 end
