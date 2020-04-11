@@ -53,12 +53,12 @@ RSpec.describe "Api::V1::Users", type: :request do
 
       it 'return created' do
         post '/api/v1/users/', params: { user: user_params }
-        except(response).to have_http_status(:created)
+        expect(response).to have_http_status(:created)
       end
 
       it 'returns right user in json' do
         post '/api/v1/users/', params: { user: user_params }
-        except(json).to include_json(user_params.except(:password))
+        expect(json).to include_json(user_params.except(:password))
       end
 
       it 'create user' do
@@ -73,7 +73,7 @@ RSpec.describe "Api::V1::Users", type: :request do
 
       before { post '/api/v1/users/', params: { user: user_params } }
 
-      it { except(response).to have_http_status(:unprocessable_entity) }
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
   
