@@ -4,7 +4,7 @@ require 'rspec/json_expectations'
 RSpec.describe "Api::V1::Users", type: :request do
   describe "GET /api/v1/users/:id" do
     context 'when user exists' do
-      let(:user) {create(:user)}
+      let(:user) {create(:user, :with_photo)}
 
       before do
         get "/api/v1/users/#{user.id}"
