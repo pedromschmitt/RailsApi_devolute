@@ -1,5 +1,5 @@
 class Api::V1::ImagesController < ApplicationController
-
+  before_action :authenticate_user
 
   def index
     user = User.find params[:user_id]
