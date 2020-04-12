@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_one_attached :photo
-  has_many :images
+  has_many :images, dependent: :destroy
   has_secure_password
   validates_length_of :password,
                       maximum: 72,
