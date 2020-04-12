@@ -1,5 +1,10 @@
 class Api::V1::ImagesController < ApplicationController
+
+
   def index
+    user = User.find params[:user_id]
+    @images = user.images
+    render json: @images
   end
 
   def show
@@ -8,6 +13,4 @@ class Api::V1::ImagesController < ApplicationController
   def create
   end
 
-  def destroy
-  end
 end
