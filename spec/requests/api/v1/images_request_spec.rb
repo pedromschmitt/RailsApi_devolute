@@ -58,14 +58,15 @@ RSpec.describe "Api::V1::Images", type: :request do
           end
         end
   
-      end
-  
-      context 'when image dont exist' do
-        let(:image_id) { -1 }
-  
-        before { get "/api/v1/images/#{image_id}" }
-  
-        it { expect(response).to have_http_status(:not_found) }
+        context 'when image dont exist' do
+          let(:image_id) { -1 }
+          
+          before do
+            get "/api/v1/images/#{image_id}", headers: header_with_authentication(user)
+          end
+          
+          it { expect(response).to have_http_status(:not_found) }
+        end
       end
     end
   end
