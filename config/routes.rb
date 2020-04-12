@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         # 'on: :collectin' remove :id from path
         get 'current', on: :collection
       end
+      resources :images, only: %i[index show create destroy]
     end
   end
 end
