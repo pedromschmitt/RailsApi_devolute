@@ -34,29 +34,39 @@ RSpec.describe "Api::V1::Images", type: :request do
   ##Show tests
 
   describe 'GET /api/v1/images/:id' do
-    context 'when image exists' do
-      let(:user) { create(:user) }
- 
-      context 'show image' do
-        let(:image) { create(:image) }
- 
-        before { get "/api/v1/images/#{image.id}" }
- 
-        it { expect(response).to have_http_status(:success) }
- 
-        it 'returns valid image in json' do
-          expect(json).to eql(serialized(Api::V1::ImageSerializer, image))
-        end
-      end
- 
+    context 'Unauthenticated' do
+      it_behaves_like :deny_without_authorization, :put, '/api/v1/users/-1'
     end
- 
-    context 'when image dont exist' do
-      let(:image_id) { -1 }
- 
-      before { get "/api/v1/images/#{image_id}" }
- 
-      it { expect(response).to have_http_status(:not_found) }
+
+    context 'Authenticated' do
+      let(:user) { create(:user) }
+
+      context 'when image exists' do
+        let(:user) { create(:user) }
+  
+        context 'show image' do
+          let(:image) { create(:image) }
+  
+          before do
+            get "/api/v1/images/#{image.id}",  headers: header_with_authentication(user)
+          end
+  
+          it { expect(response).to have_http_status(:success) }
+  
+          it 'returns valid image in json' do
+            expect(json).to eql(serialized(Api::V1::ImageSerializer, image))
+          end
+        end
+  
+      end
+  
+      context 'when image dont exist' do
+        let(:image_id) { -1 }
+  
+        before { get "/api/v1/images/#{image_id}" }
+  
+        it { expect(response).to have_http_status(:not_found) }
+      end
     end
   end
 
