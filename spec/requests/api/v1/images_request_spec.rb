@@ -42,10 +42,9 @@ RSpec.describe "Api::V1::Images", type: :request do
       let(:user) { create(:user) }
 
       context 'when image exists' do
-        let(:user) { create(:user) }
+        let(:image) { create(:image) }
   
         context 'show image' do
-          let(:image) { create(:image) }
   
           before do
             get "/api/v1/images/#{image.id}",  headers: header_with_authentication(user)
