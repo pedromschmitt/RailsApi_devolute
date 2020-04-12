@@ -18,7 +18,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Serializer json
 gem 'active_model_serializers', '~> 0.10.0'
 # jwt authentication
-gem 'knock', '~> 2.1', '>= 2.1.1'
+gem 'knock', git: 'https://github.com/nsarno/knock'
+
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
