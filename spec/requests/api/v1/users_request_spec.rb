@@ -13,7 +13,7 @@ RSpec.describe "Api::V1::Users", type: :request do
       it { expect(response).to have_http_status(:success)}
 
       it 'returns valid user in json' do
-        expect(json).to eql.(serialized(Api::V1::UserSerializer, user))
+        expect(json).to eql(serialized(Api::V1::UserSerializer, user))
       end
     end
 
