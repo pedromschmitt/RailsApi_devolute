@@ -21,6 +21,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'knock', git: 'https://github.com/nsarno/knock'
 # Aws S3
 gem 'aws-sdk-s3', require: false
+# add variants to active storage
+gem 'image_processing'
+
 
 
 
