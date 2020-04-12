@@ -18,11 +18,11 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
 
     context 'when user dont exist' do
-      let(:user_id) { -1 }
-      
-      before { get "/api/v1/users/#{user.id}" }
+      let(:invalid_user_id) { -1 }
 
-      it { expect(response).to have_http_status(:not_found)}
+      before { get "/api/v1/users/#{invalid_user_id}" }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
   end
 
