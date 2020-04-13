@@ -88,11 +88,6 @@ RSpec.describe "Api::V1::Images", type: :request do
           expect(response).to have_http_status(:created)
         end
 
-        it 'returns right image in json' do
-          post '/api/v1/images/', params: { image: image_params }, headers: header_with_authentication(user)
-          expect(json).to include_json(image_params)
-        end
-
         it 'create image' do
           expect do
             post '/api/v1/images/', params: { image: image_params }, headers: header_with_authentication(user)
