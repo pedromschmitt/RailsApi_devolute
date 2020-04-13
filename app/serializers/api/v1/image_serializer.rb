@@ -2,6 +2,7 @@ module Api
   module V1
     class ImageSerializer < ActiveModel::Serializer
       include Rails.application.routes.url_helpers
+      belongs_to :user
 
       attributes :id, :title, :image_url, :user_id
 
