@@ -1,13 +1,13 @@
 module Api
   module V1
     class ImagesController < Api::V1::ApiController
-      before_action :authenticate_user
+      # before_action :authenticate_user
       before_action :set_image, except: %i[create index]
 
 
       def index
         user = User.find params[:user_id]
-        @images = user.images
+        @images = user.images.with_attached_image
         render json: @images
       end
 
